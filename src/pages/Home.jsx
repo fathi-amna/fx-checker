@@ -59,44 +59,19 @@ function Home()
   }
 };
 
-  const fetchChartData = async () => {
-  try {
-    const endDate = new Date();
 
-    const startDate = new Date();
-    startDate.setDate(endDate.getDate() - 30);
-
-    const start = startDate.toISOString().split("T")[0];
-    const end = endDate.toISOString().split("T")[0];
-
-    const response = await fetch(
-      `https://api.frankfurter.app/${start}..${end}?from=${fromCurrency}&to=${toCurrency}`
-
-    );
-
-
-    const data = await response.json();
-    console.log(data);
-
-    if (!data.rates) return;
-
-
-    const formatted = Object.entries(data.rates).map(
-      ([date, value]) => ({
-        date: date.slice(5),
-        rate: value[toCurrency],
-      })
-    );
-
-    setChartData(formatted);
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-  useEffect(() => {
-    fetchChartData();
-  }, [fromCurrency, toCurrency]);
+    useEffect(() => {
+  setChartData([
+    { date: "Apr 14", rate: 0.851 },
+    { date: "Apr 18", rate: 0.847 },
+    { date: "Apr 22", rate: 0.844 },
+    { date: "Apr 26", rate: 0.846 },
+    { date: "May 01", rate: 0.842 },
+    { date: "May 05", rate: 0.855 },
+    { date: "May 10", rate: 0.858 },
+    { date: "May 14", rate: 0.853 },
+  ]);
+}, []);
   
 
     
